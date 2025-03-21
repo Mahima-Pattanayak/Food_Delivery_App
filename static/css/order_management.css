@@ -1,0 +1,141 @@
+.header {
+    background-color: #FFD3D3;
+    padding: 15px 0px 1px 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    margin-left: 20px;
+}
+
+.search-bar {
+    background-color: #D9D9D9;
+    padding: 12px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+}
+
+.search-bar input {
+    flex: 1;
+    padding: 8px;
+    border: none;
+    background: transparent;
+    outline: none;
+}
+
+.content-wrapper {
+    display: flex;
+    gap: 20px;
+}
+
+.orders-container {
+    flex: 1;
+    background-color: #FFD3D3;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin-left: 20px;
+}
+
+/* Table Styles */
+.order-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.order-table th,
+.order-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.order-table th {
+    background-color: #FFD3D3;
+    color: #36241a;
+    font-weight: bold;
+}
+
+.customer-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.customer-info img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.customer-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.customer-name {
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.customer-id,
+.customer-address {
+    font-size: 0.875rem;
+    color: #666;
+}
+
+.status-badge {
+    padding: 6px 12px;
+    border-radius: 4px;
+    color: white;
+    font-size: 0.875rem;
+    display: inline-block;
+}
+
+.status-preparing { background-color: #3B82F6; }
+.status-delivered { background-color: #10B981; }
+.status-cancelled { background-color: #EF4444; }
+.status-progress { background-color: #F59E0B; }
+
+.filters {
+    width: 250px;
+    background-color: #FFD3D3;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.filter-title {
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.filter-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.view-more {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.view-more button {
+    background-color: #cd8b62;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.view-more button:hover {
+    background-color: #b27a54;
+}

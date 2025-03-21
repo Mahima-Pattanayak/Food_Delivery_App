@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentiment Analysis</title>
+</head>
+<body>
+    <h1>Sentiment Analysis</h1>
+    <form method="POST" action="/analyze_sentiment">
+        <textarea name="feedback" rows="4" cols="50" placeholder="Enter your feedback"></textarea><br>
+        <button type="submit">Analyze Sentiment</button>
+    </form>
+    <div id="result"></div>
+    <script>
+        document.querySelector('form').onsubmit = async function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            const response = await fetch('/analyze_sentiment', {
+                method: 'POST',
+                body: formData,
+            });
+            const result = await response.json();
+            document.getElementById('result').innerText = `Sentiment: ${result.sentiment}`;
+        };
+    </script>
+</body>
+</html>

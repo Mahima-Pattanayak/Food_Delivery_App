@@ -1,0 +1,452 @@
+h1 {
+  flex: 1;
+  text-align: center;
+  margin: 0;
+}
+
+/* Add new form styles */
+.form-title {
+  color: #ff5714;
+}
+
+.bg-form {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  padding: 20px;
+}
+
+.input-field {
+  border: 1px solid #ff9f1c;
+  border-radius: 5px;
+  padding: 8px;
+  width: 100%;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: #ff5714;
+  box-shadow: 0 0 5px rgba(255, 87, 20, 0.3);
+}
+
+/* Update button styles */
+button {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary {
+  background-color: #ff9f1c;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #ff5714;
+}
+
+.btn-secondary {
+  background-color: #eeeeee;
+  color: #555555;
+}
+
+.btn-secondary:hover {
+  background-color: #d9d9d9;
+}
+
+/* Updated menu card styles */
+.menu-card {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.menu-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.menu-card img {
+  width: 100%;
+  height: 200px; /* Increased from 150px */
+  object-fit: cover;
+}
+
+.menu-card h3 {
+  color: #e65100; /* Darkened from #ff5714 for better contrast */
+  font-size: 1.3rem; /* Increased from 1.2rem */
+  font-weight: bold;
+}
+
+.menu-card p {
+  color: #333333; /* Darkened from #555555 for better visibility */
+}
+
+.menu-card .actions button {
+  color: #e65100; /* Darkened from #ff5714 for better contrast */
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.menu-card .actions button:hover {
+  color: #ff9f1c;
+}
+
+.navbar .logo img {
+  height: 4rem;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+}
+
+.navbar ul li {
+  margin: 0 15px;
+}
+
+.navbar ul li a {
+  text-decoration: none;
+  color: #333; /* Dark Gray for Light Mode */
+  font-size: 16px;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.navbar ul li a:hover {
+  color: #ff8c00; /* Hover effect Dark Orange */
+}
+
+/* Responsive Navbar */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+    width: 100%;
+  }
+
+  .navbar ul {
+    flex-direction: column;
+    width: 100%;
+    margin-top: 10px;
+    padding: 0;
+    text-align: left;
+  }
+
+  .navbar ul li {
+    margin: 10px 0;
+    width: 100%;
+  }
+
+  .navbar ul li a {
+    font-size: 14px;
+    padding: 10px;
+  }
+}
+
+header {
+  text-align: center;
+  padding: 1rem;
+  background: #fff8dc; /* Cornsilk for Light Mode */
+  color: #333; /* Dark Gray for Light Mode */
+  border-bottom-left-radius: 50% 10px;
+  border-bottom-right-radius: 50% 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+header > h1 {
+  display: inline-block;
+  animation-name: heading;
+  animation-duration: 2s;
+  animation-timing-function: ease-in-out;
+  animation-delay: 2ms;
+}
+
+@keyframes heading {
+  0% {
+    transform: translateZ(-1000px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateZ(0);
+    opacity: 1;
+  }
+}
+
+/* Responsive Header */
+@media (max-width: 768px) {
+  header {
+    padding: 1rem;
+    text-align: center;
+    width: 100%;
+  }
+
+  header > h1 {
+    font-size: 1.5rem;
+    margin: 0;
+  }
+}
+
+main {
+  display: flex;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+aside {
+  flex: 1;
+  background-color: #fff8dc;
+  padding: 1rem;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-right: 2rem;
+  width: fit-content;
+  height: fit-content;
+  display: inline-block;
+}
+
+#menu-items {
+  flex: 3;
+}
+
+.filter-section {
+  margin-bottom: 1.5rem;
+  width: min-content;
+  white-space: nowrap;
+}
+
+.filter-group {
+  margin-bottom: 0.5rem;
+  width: fit-content;
+}
+
+.filter-group label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.filter-group input[type="checkbox"] {
+  margin-right: 0.5rem;
+}
+
+#apply-filters {
+  width: 100%;
+  padding: 0.5rem;
+  background-color: #ff8c00;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#apply-filters:hover {
+  background-color: #ffa500; /* Orange */
+}
+
+#menu-controls {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+#search-input,
+#sort-select {
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+}
+
+#search-input {
+  flex-grow: 1;
+  margin-right: 1rem;
+}
+
+#menu-items-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+/* Updated menu item styles */
+.menu-item {
+  background-color: #fff8dc; /* Cornsilk for Light Mode */
+  border-radius: 5px;
+  padding: 1rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+}
+
+.menu-item:hover {
+  transform: translateY(-5px);
+}
+
+.menu-item img {
+  width: 100%;
+  height: 250px; /* Increased from 200px */
+  object-fit: cover;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+}
+
+.menu-item h3 {
+  margin-top: 0;
+  color: #e65100; /* Darkened from #FF8C00 for better contrast */
+}
+
+.menu-item p {
+  margin: 0.5rem 0;
+  color: #333333; /* Darkened for better visibility */
+}
+
+.menu-item .price {
+  font-weight: bold;
+  color: #c0392b; /* Darkened from #e74c3c for better contrast */
+}
+
+.menu-item .category {
+  font-style: italic;
+  color: #34495e; /* Darkened from #7f8c8d for better visibility */
+}
+
+.menu-item .dietary-preferences {
+  font-size: 0.9em;
+  color: #27ae60; /* Darkened from #2ecc71 for better contrast */
+}
+
+/* Admin Panel CSS */
+:root {
+  /* Light Mode Colors */
+  --primary-light: #ff8c00;
+  --secondary-light: #ffa500;
+  --background-light: #ffdab9;
+  --card-bg-light: #ffdab9;
+  --text-light: #333;
+
+  /* Dark Mode Colors */
+  --primary-dark: #ff8c00;
+  --secondary-dark: #ffa500;
+  --background-dark: #ffdab9;
+  --card-bg-dark: #ffdab9;
+  --text-dark: #333;
+
+  /* Common Colors */
+  --success: #2ecc71;
+  --error: #e74c3c;
+  --shadow: rgba(0, 0, 0, 0.1);
+}
+
+/* Base Styles */
+body {
+  background-color: var(--background-light);
+  color: var(--text-light);
+  transition: all 0.3s ease;
+}
+
+/* Card Styles */
+.card {
+  background: var(--card-bg-light);
+  border-radius: 8px;
+  box-shadow: 0 4px 6px var(--shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px var(--shadow);
+}
+
+/* Button Styles */
+.btn-primary {
+  background-color: var(--primary-light);
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--secondary-light);
+}
+
+/* Form Elements */
+input,
+select,
+textarea {
+  background-color: var(--card-bg-light);
+  border: 1px solid var(--secondary-light);
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--primary-light);
+  box-shadow: 0 0 0 2px rgba(255, 140, 0, 0.2);
+}
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: var(--background-dark);
+    color: var(--text-dark);
+  }
+
+  .card {
+    background: var(--card-bg-dark);
+  }
+
+  .btn-primary {
+    background-color: var(--primary-dark);
+  }
+
+  .btn-primary:hover {
+    background-color: var(--secondary-dark);
+  }
+
+  input,
+  select,
+  textarea {
+    background-color: var(--card-bg-dark);
+    border-color: var(--secondary-dark);
+    color: var(--text-dark);
+  }
+
+  input:focus,
+  select:focus,
+  textarea:focus {
+    border-color: var(--primary-dark);
+    box-shadow: 0 0 0 2px rgba(30, 144, 255, 0.2);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .card {
+    margin: 1rem;
+  }
+
+  input,
+  select,
+  textarea {
+    font-size: 16px;
+  }
+}
+
+.page-title {
+  flex: 1;
+  text-align: center;
+  margin: 0;
+  font-size: 24px;
+  font-weight: bold;
+}
+.menu-card img{
+  height: 250px;
+}

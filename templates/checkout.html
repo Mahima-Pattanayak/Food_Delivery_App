@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/checkout.css') }}">
+</head>
+<body>
+    <!-- Add hidden input for backend message -->
+    <input type="hidden" id="backend-message" data-message="{{ message }}" />
+    
+    <header class="header">
+        <div class="logo">
+            <img src="/static/images/logo.jpg" alt="Logo">
+            <h2>Checkout</h2>
+        </div>
+        <nav>
+            <a href="/menu/{{ user_id }}">Home</a>
+            <a href="/order-history/{{user_id}}">Orders</a>
+            <a href="/promotions">Offers</a>
+            <a href="/signin">Log Out</a>
+        </nav>
+    </header>
+
+    <main class="main-container">
+        <!-- Error message display -->
+        {% if message %}
+        <div class="alert {% if 'not available' in message %}alert-warning{% else %}alert-danger{% endif %}">
+            {{ message }}
+        </div>
+        {% endif %}
+
+        <section class="left-container">
+            <!-- Order Summary -->
+            <div class="order-summary">
+                <h2>Order Summary</h2>
+                {% for item in cart_items %}
+                <section class="item-container">
+                    <img src="{{item['image_url']}}" alt="{{item['name']}}" class="item-image">
+                    <div class="item-details">
+                        <span class="item-name">{{item.name}}</span>
+                        <div class="item-meta">
+                            <span>Quantity: {{item.quantity}}</span>
+                            <span>Price per item: ${{item.price}}</span>
+                        </div>
+                    </div>
+                    <span class="item-price">Total: ${{item.quantity * item.price}}</span>
+                </section>
+                {% endfor %}
+                <div class="subtotal">
+                    <strong>Sub Total:</strong> <span>${{sub_total}}</span>
+                </div>
+                <div class="discount">
+                    <button class="btn" id="add-discount-btn">Add Discount</button>
+                    <div id="discount-container">
+                        <input type="text" id="coupon-code" placeholder="Enter Coupon Code" style="width: 600px;">
+                        <button type="button" id="validate-coupon-btn" class="btn btn-green" style="margin-left: 5px; margin-top: 35px;">Validate</button>
+                    </div>
+
+                </div>
+                <div class="order-note">
+                    <b><p>Order Note</p></b>
+                  <input type="text" id="order-note" 
+                            name="order_note"
+                            placeholder="Enter any special instructions..." style="width: 710px;"></input>
+                </div>
+            </div>
+
+            <!-- Order Form -->
+            <form id="checkoutForm" method="POST">
+                <!-- Delivery Location -->
+                <div class="delivery-location">
+                    <h2>Delivery Location</h2>
+                    <div class="location-input-group">
+                        <input id="delivery_location" 
+                               name="delivery_location"
+                               type="text" 
+                               placeholder="Enter a valid Delivery Location..." 
+                               required>
+                        <button type="button" id="validateButton">
+                            Validate
+                        </button>
+                    </div>
+                </div>
+
+                <br>
+
+                <!-- Applicable Taxes -->
+                <div class="applicable-taxes">
+                    <h2>Applicable Taxes</h2>
+                    <ul>
+                        <li>GST: <span>${{gst}}</span></li>
+                        <li>Sales Tax: <span>${{sales_tax}}</span></li>
+                        <li>Total Tax Amount: <span>${{tax_amount}}</span></li>
+                    </ul>
+                </div>
+            </section>
+        <!-- Total Payment -->
+        <div class="total-payment">
+          <h2 style="text-align: center;">Total Payment</h2><br>
+          <ul>
+              <li><strong>Sub Total:</strong> <span>${{sub_total}}</span></li>
+              <li><strong>Delivery Fee:</strong> <span>${{delivery_fee}}</span></li>
+              <li><strong>Tax Amount:</strong> <span>${{tax_amount}}</span></li>
+              <li><strong>Total Price:</strong> <span>${{total_price}}</span></li>
+          </ul>
+          <!-- The button should be inside the main form -->
+          <button type="submit" class="btn btn-green">Place Order</button>
+        </div>
+            </form>
+    </main>
+
+    <div id="error-message" class="error-message" style="display: none;"></div>
+
+    <script>
+        const TOTAL_PRICE = "{{ total_price | tojson | safe }}";
+    </script>
+    <script src="{{ url_for('static', filename='js/checkout.js') }}"></script>
+</body>
+</html>

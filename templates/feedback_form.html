@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Feedback</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/feedback_form.css') }}">
+</head>
+<body>
+    <div class="feedback-container">
+        <h1>
+            <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Logo">
+            Customer Feedback
+        </h1>
+        <form method="post" action="/submit-feedback/{{ order_id }}">
+            <div class="form-group">
+                <label>Rate us:</label>
+                <div class="star-rating">
+                    <input type="radio" name="rating" id="star5" value="5" required><label for="star5">★</label>
+                    <input type="radio" name="rating" id="star4" value="4"><label for="star4">★</label>
+                    <input type="radio" name="rating" id="star3" value="3"><label for="star3">★</label>
+                    <input type="radio" name="rating" id="star2" value="2"><label for="star2">★</label>
+                    <input type="radio" name="rating" id="star1" value="1"><label for="star1">★</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="comment">Your Feedback:</label>
+                <textarea name="comment" id="comment" rows="4" placeholder="Tell us about your experience..."></textarea>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

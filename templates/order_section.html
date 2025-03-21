@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order History</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/order_section.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Logo">
+            <h1>Order History</h1>
+        </div>
+        <div class="nav-links">
+            <a href="/menu/{{ user_id }}">Home</a>
+            <a href="#" class="active">Orders</a>
+            <a href="/promotions">Offers</a>
+            <a href="/signin">Log Out</a>
+        </div>
+    </nav>
+     <br>
+    <div class="search-container">
+        <input type="text" id="orderSearch" placeholder="Search for Order Id">
+    </div>
+
+    {% if orders %}
+    <div class="orders-grid">
+        {% for order in orders %}
+        <div class="order-card" data-order-id="{{ order.order_id }}">
+            <div class="order-header">
+                <h2>Order #{{ order.order_id }}</h2>
+                <a href="/order-summary/{{ order.order_id }}" class="view-details" method="GET">View Details →</a>
+            </div>
+            <p>{{ order.order_date }} | {{ order.order_time }}</p><br>
+
+            {% if order.item_list %}
+                {% for item in order.item_list %}
+                <div class="order-item">
+                    <img src="{{ item.image_url }}" alt="{{ item.name }}">
+                    <div class="item-details">
+                        <h3>{{ item.name }}</h3>
+                        <p>{{ item.description }}</p>
+                        <div class="item-quantity">
+                            <span>Qty: {{ item.quantity }}</span>
+                            <span>Rs. {{ item.price }}</span>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            {% endif %}
+
+            <div class="order-footer">
+                <div class="total-price">
+                    <span>Total Price:</span>
+                    <span>Rs. {{ order.total_price }}</span>
+                </div>
+                <button class="order-status {{ order.order_status.lower().replace(' ', '-') }}" style="border: none;">
+                    {{ order.order_status }}
+                </button>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="no-orders">
+        <h2>No orders found</h2>
+        <p>You haven't placed any orders yet.</p>
+    </div>
+    {% endif %}
+    <script src="{{ url_for('static', filename='js/order_section.js') }}"></script>
+</body>
+</html>

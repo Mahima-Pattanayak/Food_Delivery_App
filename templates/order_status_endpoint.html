@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+
+{% block title %}Unassigned Orders dashboard{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/order_status_endpoint.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="header">
+    <button class="back-button" onclick="window.history.back()">← Order #{{ order.order_id }} Details</button>
+</div>
+
+<div class="order-details" id="orderDetails">
+    <div class="order-section">
+        <h2>Ordered Items</h2>
+        {% for item in items %}
+        <div class="order-item">
+            <img src="{{ item.ImageURL or '/api/placeholder/80/60' }}" alt="{{ item.Name }}">
+            <div class="item-details">
+                <h3>{{ item.Name }}</h3>
+                <p>Extra: {{ item.Description or 'None' }}</p>
+            </div>
+            <div>Rs {{ item.price }} X {{ item.quantity }}</div>
+            <div>Rs {{ item.total_price }}</div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="order-section">
+        <h2>Order Fee</h2>
+        <div style="margin-top: 15px">
+            <p style="display: flex; justify-content: space-between; margin-bottom: 10px">
+                <span>Subtotal:</span>
+                <span>Rs. {{ "%.2f"|format(subtotal) }}</span>
+            </p>
+            <p style="display: flex; justify-content: space-between; margin-bottom: 10px">
+                <span>Tax:</span>
+                <span>Rs. {{ "%.2f"|format(tax) }}</span>
+            </p>
+            <p style="display: flex; justify-content: space-between; margin-bottom: 10px">
+                <span>Delivery Fee:</span>
+                <span>Rs. {{ "%.2f"|format(delivery_fee) }}</span>
+            </p>
+            <p style="display: flex; justify-content: space-between; margin-bottom: 10px; font-weight: bold">
+                <span>Total Amount:</span>
+                <span>Rs. {{ "%.2f"|format(total) }}</span>
+            </p>
+        </div>
+        <div style="margin-top: 20px">
+            <label>Order Status:</label>
+            <select id="orderStatus" data-order-id="{{ order.order_id }}">
+                <option value="pending" {% if order and order.order_status == 'Pending' %}selected{% endif %}>Pending</option>
+                <option value="order_confirmed" {% if order and order.order_status == 'Order Confirmed' %}selected{% endif %}>Order Confirmed</option>
+                <option value="preparing" {% if order and order.order_status == 'Preparing' %}selected{% endif %}>Preparing Food</option>
+                <option value="out_for_delivery" {% if order and order.order_status == 'Out for Delivery' %}selected{% endif %}>Out for Delivery</option>
+                <option value="Delivered" {% if order and order.order_status == 'Completed' %}selected{% endif %}>Delivered</option>
+                <option value="cancelled" {% if order and order.order_status == 'Cancelled' %}selected{% endif %}>Cancelled</option>
+            </select>
+        </div>
+        <button class="update-status">Update Status</button>
+    </div>
+</div>
+
+{% if order and order.order_status != 'Cancelled' %}
+<div class="order-tracking" id="orderTracking">
+    <h2>Order Tracking</h2>
+    {% set progress = {
+        'Preparing': 42,
+        'Out for Delivery': 75,
+        'Completed': 100,
+        'Order Confirmed': 10
+    } %}
+    
+    {% set current_progress = progress.get(order.order_status, 0) if order else 0 %}
+    
+    <div class="tracking-progress">
+        <div class="progress-line"></div>
+        <div class="progress-line-filled" style="width: {{ current_progress }}%;"></div>
+        <div class="tracking-step">
+            <div class="step-icon {% if current_progress >= 10 %}active{% endif %}">✓</div>
+            <p>Order Confirmed</p>
+        </div>
+        <div class="tracking-step">
+            <div class="step-icon {% if current_progress >= 42 %}active{% endif %}">🍳</div>
+            <p>Preparing Food</p>
+        </div>
+        <div class="tracking-step">
+            <div class="step-icon {% if current_progress >= 75 %}active{% endif %}">🚚</div>
+            <p>Out for Delivery</p>
+        </div>
+        <div class="tracking-step">
+            <div class="step-icon {% if current_progress >= 100 %}active{% endif %}">📦</div>
+            <p>Delivered</p>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<div class="order-section customer-details" id="customerDetails">
+    <h2>Customer Details</h2>
+    <div class="details-grid">
+        <div class="detail-item">
+            <span class="detail-label">Name:</span>
+            <span class="detail-value">{{ order.full_name }}</span>
+        </div>
+        <div class="detail-item">
+            <span class="detail-label">Email:</span>
+            <span class="detail-value">{{ order.email }}</span>
+        </div>
+        <div class="detail-item">
+            <span class="detail-label">Contact No:</span>
+            <span class="detail-value">{{ order.phone_number }}</span>
+        </div>
+        <div class="detail-item">
+            <span class="detail-label">Address:</span>
+            <span class="detail-value">{{ order.delivery_location }}</span>
+        </div>
+    </div>
+</div>
+
+<div class="delivery-agent" id="deliveryAgentDetails">
+    <h2>Delivery Agent Detail</h2>
+    {% if delivery and delivery.agent_name %}
+    <div class="agent-details">
+        <div>
+            <p><strong>Agent ID:</strong></p>
+            <p>#{{ delivery.Delivery_Agent_ID }}</p>
+        </div>
+        <div>
+            <p><strong>Name:</strong></p>
+            <p>{{ delivery.agent_name }}</p>
+        </div>
+        <div>
+            <p><strong>Status:</strong></p>
+            <p>{{ delivery.agent_status }}</p>
+        </div>
+    </div>
+    {% else %}
+    <p>No delivery agent assigned yet.</p>
+    {% endif %}
+    <button class="reassign-button">Reassign</button>
+</div>
+{% endblock %}
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/order_status_endpoint.js') }}"></script>
+{% endblock %}

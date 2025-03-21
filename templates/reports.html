@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Report Generator</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #ea7c7c, #fcec83);
+            height: 100%;
+        }
+        .navbar {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #FFD3D3;
+        }
+        .navbar button {
+            background: none;
+            border: none;
+            color: black;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .header-image {
+            width: 100%;
+            height: 50vh;
+            background-image: url('/static/images/pancakes.jpg'); 
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        .header-image::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 80%;
+            filter: brightness(0.7);
+            z-index: -1;
+        }
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 20px;
+        }
+        .horizontal-line {
+            width: 90%;
+            height: 2px;
+            background-color: #333;
+            margin: 10px 0;
+        }
+        .content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 90%;
+            margin-bottom: 10px;
+        }
+        .content-header h2 {
+            margin: 0;
+            font-size: 1.5rem;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="header-image">
+        <div class="navbar">
+            <button id="backButton">Back</button>
+        </div>
+    </div>
+    <div class="content">
+        <h2>Reports</h2>
+        <h2>Top Selling Items</h2>
+        <div class="date-picker">
+            <form method="post" action="/top_selling_items">
+                <label for="month">Select Month:</label>
+                <input type="month" id="month" name="month" required>
+                <button formaction="/download_top_selling_items" type="submit">Download Top Selling Items Report</button>
+            </form>
+        </div>
+        <div class="horizontal-line"></div>
+        <h2>Revenue Analysis</h2>
+        <div class="date-picker">
+            <form method="post" action="/revenue_analysis">
+                <label for="year">Select Year:</label>
+                <input type="text" id="year" name="year" placeholder="YYYY" pattern="\d{4}" required>
+                <button formaction="/download_revenue_analysis" type="submit">Download Revenue Analysis Report</button>
+            </form>
+        </div>
+        <div class="horizontal-line"></div>
+        <h2>Delivery Performance</h2>
+        <div class="date-picker">
+            <form method="post" action="/delivery_performance">
+                <label for="agent_id">Enter Agent ID:</label>
+                <input type="text" id="agent_id" name="agent_id" required>
+                <button formaction="/download_delivery_performance" type="submit">Download Delivery Performance Report</button>
+            </form>
+        </div>
+        <div class="horizontal-line"></div>
+        <h2>Customer Orders History</h2>
+        <div class="report-section">
+            
+            <div class="date-picker">
+                <form method="post" action="/customer_orders_history">
+                    <label for="customer_id">Select Customer ID:</label>
+                    <input type="text" id="customer_id" name="customer_id" required>
+                        {% for customer in customers %}
+                            <option value="{{ customer }}">{{ customer }}</option>
+                        {% endfor %}
+                    </select>
+                    <button formaction="/download_customer_orders_history" type="submit">Download Customer Orders History Report</button>
+                </form>
+            </div>
+            
+            {% if chart_html %}
+                <img src="data:image/png;base64,{{ chart_html }}" alt="Customer Orders History Chart">
+            {% endif %}
+        </div>
+        
+        <div class="horizontal-line"></div>
+        <h2>Order Statistics</h2>
+        <div class="report-section">
+            <div class="date-picker">
+                <form method="post" action="/order_statistics">
+                    <!-- <label for="year">Select Year:</label>
+                    <input type="text" id="year" name="year" placeholder="YYYY" pattern="\d{4}" required> -->
+                    <label for="month">Select Month:</label>
+                    <input type="month" id="month" name="month" required>
+                    <button formaction="/download_order_statistics" type="submit">Download Report</button>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Display the graphs one by one -->
+        <div class="report-section">
+            <div id="top-selling-items" class="report-item">
+                
+                {% if top_selling_items_chart_url %}
+                    <img src="data:image/png;base64,{{ top_selling_items_chart_url }}" alt="Top Selling Items Chart">
+                {% endif %}
+            </div>
+            <div id="revenue-analysis" class="report-item">
+                
+                {% if revenue_bar_chart_url %}
+                    <img src="data:image/png;base64,{{ revenue_bar_chart_url }}" alt="Revenue Analysis Bar Chart">
+                {% endif %}
+            </div>
+            <div id="delivery-performance" class="report-item">
+                
+                {% if avg_time_plot_url %}
+                    <img src="data:image/png;base64,{{ avg_time_plot_url }}" alt="Average Delivery Time Chart">
+                {% endif %}
+                {% if on_time_rate_plot_url %}
+                    <img src="data:image/png;base64,{{ on_time_rate_plot_url }}" alt="On-Time Delivery Rate Chart">
+                {% endif %}
+            </div>
+            
+            {% if order_statistics_chart_url %}
+                <img src="data:image/png;base64,{{ order_statistics_chart_url }}" alt="Order Statistics Chart">
+            {% endif %}
+        </div>
+
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function navigateOtherPage() {
+            window.location.href = 'restaurant_dashboard';
+        }
+        document.getElementById('backButton').addEventListener('click', navigateOtherPage);
+    </script>
+</body>
+</html>

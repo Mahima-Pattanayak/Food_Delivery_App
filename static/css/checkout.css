@@ -1,0 +1,301 @@
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #ffe4e1;
+  color: #333;
+}
+
+/* Header */
+.header {
+  background-color: #2C3E50;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  height: 50px;
+}
+
+header .logo {
+font-size: 1.5rem;
+font-weight: bold;
+}
+.logo img {
+width: 50px;
+height: 50px;
+border-radius: 50%;
+}
+.logo {
+display: flex;
+align-items: center;
+gap: 1rem;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.header nav a {
+  color: #fff;
+  text-decoration: none;
+  margin-left: 15px;
+}
+
+.header nav a:hover {
+  text-decoration: none;
+  color: #848484;
+}
+
+/* Main Container */
+.main-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Left Container */
+.left-container {
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Section Containers */
+.order-summary, .delivery-location, .applicable-taxes, .total-payment {
+  background-color: #D9D9D9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.order-summary h2,
+.delivery-location h2,
+.applicable-taxes h2,
+.total-payment h2 {
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.total-payment ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+}
+.total-payment{
+  background-color: #4f4f4f;
+  color: white;
+}
+
+.total-payment ul li {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+/* Order Summary Styles */
+/* General Styles for Order Summary */
+.order-summary {
+  padding: 20px;
+  background-color: #d9d9d9;
+  border-radius: 10px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.order-summary h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.item-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  padding: 10px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+  height: 80px;
+}
+
+.item-container:last-child {
+  margin-bottom: 0;
+}
+
+.item-image {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-right: 15px;
+}
+
+.item-details {
+  flex-grow: 1;
+  margin-top: 10px;
+}
+
+.item-name {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+  font-size: 16px;
+}
+
+.item-meta span {
+  display: block;
+  font-size: 14px;
+  color: #666;
+}
+
+.item-price {
+  font-weight: bold;
+  font-size: 16px;
+  color: #333;
+  margin-left: 40%;
+  margin-bottom: 30px;
+  
+}
+
+.btn {
+  display: block;
+  margin: 30px auto;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background-color: #0056b3;
+}
+
+.discount {
+  display: flex;
+  gap: 5px;
+}
+
+#discount-container {
+  display: flex;
+  align-items: center;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+#coupon-code {
+  width: 300px;
+}
+
+
+
+ #coupon-code{
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+ }
+
+.subtotal {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  margin-top: 20px;
+  font-size: 18px;
+}
+
+
+/* Delivery Section */
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Taxes */
+.applicable-taxes ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.applicable-taxes ul li {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.total-tax {
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* Total Payment (Right Container) */
+.total-payment {
+  flex: 1;
+  align-self: flex-start;
+  margin-top: 50px;
+  margin-left: 10px;
+}
+
+/* Buttons */
+.btn {
+  background-color: #2d4e68;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #1b2f42;
+}
+
+.btn-green {
+  background-color: #28a745;
+}
+
+.btn-green:hover {
+  background-color: #218838;
+}
+
+.order-note{
+  display: flex;
+  gap: 10px;
+}
+
+.location-input-group{
+  display: flex;
+  gap: 10px;
+  }
+  #delivery_location{
+  width: 700px;
+  }
+  #validateButton{
+  border: none;
+  background-color:green;
+  color: white;
+  width: 100px;
+  border-radius: 4px;
+  height: 40px;
+  margin-top: 10px;
+  }

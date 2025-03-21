@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Performance Dashboard</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-logo">
+            <a href="/">
+                <img src="https://res.cloudinary.com/dx6kfgfal/image/upload/v1736183862/Hifi_logo_zwjwbd.png" 
+                     alt="HiFi Eats Logo" 
+                     style="height: 50px;">
+            </a>
+            <h1 style="color: #000000;">Delivery Agent Dashboard</h1>
+        </div>
+        <ul class="navbar-links">
+            <li><a href="/delivery_agent_dashboard/{{ agent_id }}"><i class="material-icons">home</i> Home</a></li>
+            <li><a href="/orders/{{ agent_id }}"><i class="material-icons">list</i> Orders</a></li>
+            <li><a href="/route/{{ agent_id }}"><i class="material-icons">map</i> Route</a></li>
+            <li><a href="/performance/{{ agent_id }}"><i class="material-icons">assessment</i> Performance</a></li>
+            <li><a href="/report_issue/{{ agent_id }}"><i class="material-icons">report_problem</i> Report Issue</a></li>
+        </ul>
+    </nav>
+
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <h2>Performance Overview</h2>
+        </header>
+
+        <div class="stats-cards">
+            <div class="card">
+                <h3>Total Orders</h3>
+                <p>{{ stats.get('total_orders', 0) }}</p>
+            </div>
+            <div class="card">
+                <h3>Completed Orders</h3>
+                <p>{{ stats.get('completed_orders', 0) }}</p>
+            </div>
+            <div class="card">
+                <h3>Cancelled Orders</h3>
+                <p>{{ stats.get('canceled_orders', 0) }}</p>
+            </div>
+            <div class="card">
+                <h3>Delayed Orders</h3>
+                <p>{{ stats.get('delayed_orders', 0) }}</p>
+            </div>
+        </div>
+
+        <main class="dashboard-main">
+            <section class="charts">
+                <div class="chart-container">
+                    <h3>Delivery Status Breakdown</h3>
+                    <canvas id="pieChart"></canvas>
+                </div>
+
+                <div class="chart-container">
+                    <h3>Delivery Performance Over Time</h3>
+                    <canvas id="lineChart"></canvas>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Pie Chart Configuration
+        const pieData = {
+            labels: ['Completed', 'Cancelled', 'Delayed'],
+            datasets: [{
+                data: [
+                    {{ stats.get('completed_orders', 0) }},
+                    {{ stats.get('canceled_orders', 0) }},
+                    {{ stats.get('delayed_orders', 0) }}
+                ],
+                backgroundColor: ['#4caf50', '#f44336', '#ff9800'],
+                borderColor: '#ffffff',
+                borderWidth: 2,
+                hoverBorderWidth: 3,
+                hoverBorderColor: '#cccccc'
+            }]
+        };
+
+        const pieConfig = {
+            type: 'pie',
+            data: pieData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'bottom',
+                        labels: {
+                            color: '#333333',
+                            font: { size: 14 }
+                        }
+                    },
+                    tooltip: {
+                        enabled: true,
+                        callbacks: {
+                            label: (tooltipItem) => {
+                                const data = pieData.datasets[0].data;
+                                const total = data.reduce((sum, value) => sum + value, 0);
+                                const value = data[tooltipItem.dataIndex];
+                                const percentage = ((value / total) * 100).toFixed(1);
+                                return `${pieData.labels[tooltipItem.dataIndex]}: ${value} (${percentage}%)`;
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        // Line Chart Configuration
+        const lineData = {
+            labels: {{ performance_data.get('time_labels', []) | tojson }},
+            datasets: [
+                {
+                    label: 'Successful Deliveries',
+                    data: {{ performance_data.get('successful', []) | tojson }},
+                    borderColor: '#4caf50',
+                    fill: false,
+                    tension: 0.4
+                },
+                {
+                    label: 'Failed Deliveries',
+                    data: {{ performance_data.get('failed', []) | tojson }},
+                    borderColor: '#f44336',
+                    fill: false,
+                    tension: 0.4
+                }
+            ]
+        };
+
+        const lineConfig = {
+            type: 'line',
+            data: lineData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        };
+
+        // Initialize Charts
+        new Chart(document.getElementById('pieChart'), pieConfig);
+        new Chart(document.getElementById('lineChart'), lineConfig);
+    </script>
+</body>
+</html>

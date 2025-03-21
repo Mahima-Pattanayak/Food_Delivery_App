@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback Anomalies</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>Detected Feedback Anomalies</h1>
+    
+    {% if anomalies %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Feedback ID</th>
+                    <th>Order ID</th>
+                    <th>Customer ID</th>
+                    <th>Rating</th>
+                    <th>Comment</th>
+                    <th>Anomaly Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for anomaly in anomalies %}
+                <tr>
+                    <td>{{ anomaly.feedback_id }}</td>
+                    <td>{{ anomaly.order_id }}</td>
+                    <td>{{ anomaly.customer_id }}</td>
+                    <td>{{ anomaly.rating }}</td>
+                    <td>{{ anomaly.comment }}</td>
+                    <td>{{ anomaly.anomaly_type }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No anomalies detected.</p>
+    {% endif %}
+</body>
+</html>

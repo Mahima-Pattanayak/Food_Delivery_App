@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block title %}Restaurant Menu Admin Panel{% endblock %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/menu_management.css') }}">
+    {% endblock %}
+
+
+    {% block content %}
+        <h1 class="page-title">Admin Panel</h1>
+    </nav>
+    <!-- Export Button -->
+    <div class="flex justify-end p-4">
+        <button id="exportButton" class="btn-primary px-4 py-2 rounded-md hover:bg-pink-600" style="margin-right: 40px;">
+            Export Menu Items
+        </button>
+    </div>
+
+    <!-- Form Section -->
+    <div class="bg-form mx-8 p-6 mb-6">
+        <h2 class="form-title text-2xl font-semibold mb-4">Add or Edit Menu Item</h2>
+        <form id="menuItemForm" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <input type="hidden" id="menuItemId" name="menuItemId">
+
+            <div>
+                <label for="name" class="block text-sm font-medium">Item Name</label>
+                <input type="text" id="name" name="name" required class="input-field mt-1">
+            </div>
+
+            <div>
+                <label for="description" class="block text-sm font-medium">Description</label>
+                <textarea id="description" name="description" class="input-field mt-1"></textarea>
+            </div>
+
+            <div>
+                <label for="price" class="block text-sm font-medium">Price</label>
+                <input type="number" id="price" name="price" step="0.01" min="0" required class="input-field mt-1">
+            </div>
+
+            <div>
+                <label for="category" class="block text-sm font-medium">Category</label>
+                <select id="category" name="category" required class="input-field mt-1">
+                    <option value="" disabled selected>Select a category</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="imageUrl" class="block text-sm font-medium">Image URL</label>
+                <input type="text" id="imageUrl" name="imageUrl" class="input-field mt-1">
+            </div>
+
+            <div class="col-span-full">
+                <label class="inline-flex items-center">
+                    <input type="checkbox" id="availabilityStatus" name="availabilityStatus" class="rounded text-orange-500">
+                    <span class="ml-2">Available</span>
+                </label>
+            </div>
+
+            <div class="col-span-full flex gap-4">
+                <button type="submit" id="saveButton" class="btn-primary px-4 py-2 rounded-md">
+                    Save Menu Item
+                </button>
+                <button type="button" id="clearButton" class="btn-secondary px-4 py-2 rounded-md">
+                    Clear Form
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Menu Items Section -->
+    <div class="bg-form mx-8 p-6">
+        <h2 class="form-title text-2xl font-semibold mb-4">Menu Items</h2>
+        <div id="menuItemsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Menu item cards will be dynamically populated here -->
+        </div>
+    </div>
+    {% endblock %}
+    {% block extra_js %}
+    <script src="{{ url_for('static', filename='js/menu_management.js') }}"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    {% endblock %}
+        

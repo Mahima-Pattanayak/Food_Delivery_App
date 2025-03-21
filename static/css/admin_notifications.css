@@ -1,0 +1,96 @@
+﻿body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #ea7c7c, #fcec83);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .header-image {
+            width: 160%;
+            height: 50vh;
+            background-image: url('/static/images/background_image.jpg');
+            background-size: cover;
+            background-position: center;
+            position: absolute;
+            top: 0;
+            right: -200;
+            left: 0;
+            z-index: -1;
+            margin-bottom: 20px; 
+            margin-left: -150px;
+            overflow: hidden;
+        }
+
+        .header-image::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.3);
+            z-index: -1;
+        }
+
+        .notification-container {
+            background-color: white;
+            width: 130%; /* Changed from 90% to 75% */
+            max-width: 800px;
+            border-radius: 8px; /* Changed from 12px to 8px */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Changed from 0 4px 8px rgba(0, 0, 0, 0.2) to 0 2px 4px rgba(0, 0, 0, 0.1) */
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            position: relative;
+            margin: 0 auto; /* Added margin */
+            margin-top: 50px;
+            left: -75px;
+        }
+
+        .notification-header {
+            font-size: 24px; /* Changed from 20px to 24px */
+            font-weight: bold;
+            color: #333; /* Changed from #d22d2d to #333 */
+            margin-bottom: 20px; /* Changed from 15px to 20px */
+            text-align: center; /* Changed from left to center */
+        }
+
+        .notification-item {
+            background-color: #fff; /* Changed from #ffd9d9 to #fff */
+            border-radius: 4px; /* Changed from 8px to 4px */
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            gap: 10px;
+            margin-bottom: 10px; /* Added margin-bottom */
+            border: 1px solid #ddd; /* Added border */
+            transition: background-color 0.3s; /* Added transition */
+        }
+
+        .notification-item:hover {
+            background-color: #f1f1f1; /* Added hover effect */
+        }
+
+        .notification-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: yellow;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px; /* Changed from 20px to 24px */
+            color: #ff9800; /* Changed from red to #ff9800 */
+            flex-shrink: 0;
+            margin-right: 10px; /* Added margin-right */
+        }
+
+        .notification-text {
+            flex-grow: 1;
+            font-size: 16px;
+            color: #555; /* Changed from #333 to #555 */
+        }

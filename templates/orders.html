@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Management</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <header class="dashboard-header">
+            <h1 style="text-align: center; background: linear-gradient(to right, #FF5F1F, #ff94ad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-size: 2.5rem; margin-bottom: 2rem; padding-top: 1rem;">Order Management</h1>
+            </header>
+            
+            <nav class="navbar">
+                
+                    <div class="navbar-logo">
+                        <a href="/">
+                            <img src="https://res.cloudinary.com/dx6kfgfal/image/upload/v1736183862/Hifi_logo_zwjwbd.png" 
+                                 alt="HiFi Eats Logo" 
+                                 style="height: 50px;">
+                        </a>
+                        <h1 style="color: #000000;">Delivery Agent Dashboard</h1>
+                    </div>
+                    <ul class="navbar-links">
+                        <li><a href="/delivery_agent_dashboard/{{ agent_id }}"><i class="material-icons">home</i> Home</a></li>
+                        <li><a href="/orders/{{ agent_id }}"><i class="material-icons">list</i> Orders</a></li>
+                        <li><a href="/route/{{ agent_id }}"><i class="material-icons">map</i> Route</a></li>
+                        <li><a href="/performance/{{ agent_id }}"><i class="material-icons">assessment</i> Performance</a></li>
+                        <li><a href="/report_issue/{{ agent_id }}"><i class="material-icons">report_problem</i> Report Issue</a></li>
+                    </ul>
+              
+            </nav>
+            
+        </header>
+
+        <main class="dashboard-main">
+            <h2>Current Orders</h2>
+            <table class="order-table">
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Customer ID</th>
+                        <th>Total Price</th>
+                        <th>Status</th>
+                        <th>Delivery Location</th>
+                        <th>Order Date</th>
+                        <th>Order Time</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                    <tr>
+                        <td>{{ order.order_id }}</td>
+                        <td>{{ order.customer_id }}</td>
+                        <td>${{ order.total_price }}</td>
+                        <td style="white-space: nowrap;"><span class="status {{ order['order_status']|lower|replace(' ', '-') }}">{{ order['order_status'] }}</span></td>
+                        <td>{{ order.delivery_location }}</td>
+                        <td>{{ order.order_date }}</td>
+                        <td>{{ order.order_time }}</td>
+                       
+
+                        <td>
+                            <form action="/update_status/{{ order.order_id }}" method="post" style="display: inline;">
+                                <select name="new_status">
+                                    <option value="New">New</option>
+                                    <option value="In Progress">In Progress</option>
+                                    <option value="Completed">Completed</option>
+                                    <option value="Delayed">Delayed</option>
+                                    <option value="Canceled">Canceled</option>
+                                </select>
+                                <button type="submit" class="btn update-btn">Update</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </main>
+    </div>
+</body>
+</html>
+

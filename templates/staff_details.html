@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}Orders Overview{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/staff_details.css') }}">
+{% endblock %}
+{% block content %}
+<div class="header">
+    <button class="back-btn">←</button>
+    <h1>Agent Details</h1>
+</div>
+
+<div class="agent-details">
+    <div class="details">
+        <div class="title-agent">Agent ID : #{{ user.user_id }}</div>
+        <p><strong>Name:</strong> {{ user.full_name }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Service:</strong> {{ years_of_service }} years</p>
+        <p><strong>Phone Number:</strong> {{ user.phone_number }}</p>
+        <br>
+        <a href="{{url_for('performance_metrics')}}" class="view-metrics">View Agent Metrics</a>
+    </div>
+    <div class="total-orders">
+        <div>{{ total_orders }}</div>
+        <span>Total Orders</span>
+    </div>
+</div>
+
+<div class="daily-status">
+    <div class="status-header">
+        <h2>Daily Status</h2>
+        <div class="date-picker">
+            <input type="date" id="statusDate" value="{{ selected_date }}" class="date-input">
+            <button onclick="updateMetrics()" class="view-btn">View</button>
+        </div>
+    </div>
+    
+    <div class="status">
+        <div>
+            <p>Cancelled Deliveries</p>
+            <div class="circle">{{ metrics.cancelled_deliveries }}</div>
+        </div>
+        <div>
+            <p>Completed deliveries</p>
+            <div class="circle">{{ metrics.completed_deliveries }}</div>
+        </div>
+        <div>
+            <p>Total deliveries</p>
+            <div class="circle">{{ metrics.total_deliveries }}</div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/staff_details.js') }}"></script>
+{% endblock %}

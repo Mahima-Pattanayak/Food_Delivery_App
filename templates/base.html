@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Default Title{% endblock %}</title>
+    {% block extra_css %}{% endblock %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <a href="{{ url_for('restaurant_dashboard') }}">
+                    <h2>HiFi Delivery Eats</h2>
+                </a>
+            </div>
+            <div class="menu">
+                <h3>Main Menu</h3>
+                <ul>
+                    <li><a href="{{ url_for('reports')}}" data-section="reports"><i class="fas fa-tachometer-alt"></i> Reports</a></li>
+                    <li><a href="{{ url_for('admin_notifications')}}" data-section="admin-notifications"><i class="fas fa-bell"></i> Admin Notifications</a></li>
+                    <li><a href="{{ url_for('sales_trends')}}" data-section="sales-trends"><i class="fas fa-chart-line"></i> Sales Insights</a></li>
+                    <li><a href="{{ url_for('feedback_analysis')}}" data-section="customer-insights"><i class="fas fa-users"></i> Customer Insights</a></li>
+                    <li><a href="{{ url_for('admin')}}"><i class="fas fa-utensils"></i> Menu Management</a></li>
+                    <li><a href="{{ url_for('order_management')}}"><i class="fas fa-shopping-cart"></i> Order Management</a></li>
+                    <li><a href="{{ url_for('unassigned_orders') }}"><i class="fas fa-list-alt"></i> Unassigned Orders</a></li>
+                    <li><a href="{{url_for('performance_metrics')}}"><i class="fas fa-chart-bar"></i> Performance Metrics</a></li>
+                    <li><a href="{{ url_for('order_overview') }}"><i class="fas fa-receipt"></i> Orders Overview</a></li>
+                    <li><a href="{{url_for('staff_list')}}"><i class="fas fa-motorcycle"></i> Delivery Agents</a></li>
+                    <li><a href="{{url_for('issues_reported')}}"><i class="fas fa-exclamation-triangle"></i> Reported Issues</a></li>
+                    <li><a href="{{url_for('signin')}}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                </ul>                
+            </div>
+        </div>
+<div class="main-content">
+{% block content %}
+        
+{% endblock %}
+</div>
+{% block extra_js %}{% endblock %}
+<script src="{{ url_for('static', filename='js/base_restaurant.js') }}"></script>
+</body>
+</html>

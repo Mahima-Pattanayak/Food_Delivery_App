@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delivery Metrics</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to top, #ffbbbb, #fcffca);
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        h1, h2 {
+            color: #333;
+        }
+
+        form {
+            margin: 20px auto;
+            display: inline-block;
+            text-align: left;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            font-size: 16px;
+            color: #555;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        img {
+            max-width: 90%;
+            height: auto;
+            margin: 20px auto;
+            display: block;
+        }
+
+        p {
+            color: #777;
+            font-size: 14px;
+        }
+
+        .metrics-container {
+            margin-top: 30px;
+        }
+
+        .metrics-container h2 {
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Delivery Metrics</h1>
+
+    <form method="POST" action="{{ url_for('delivery_metrics') }}">
+        <label for="agent_id">Enter Agent ID:</label>
+        <input type="number" id="agent_id" name="agent_id" value="{{ agent_id }}">
+        <button type="submit" class="btn">Generate Metrics</button>
+    </form>
+
+    <div class="metrics-container">
+        <h2>Average Delivery Time</h2>
+        {% if avg_time_plot_url %}
+            <img src="data:image/png;base64,{{ avg_time_plot_url }}" alt="Average Delivery Time Bar Chart">
+        {% else %}
+            <p>No data available for Average Delivery Time.</p>
+        {% endif %}
+
+        <h2>On-Time Delivery Rate</h2>
+        {% if on_time_rate_plot_url %}
+            <img src="data:image/png;base64,{{ on_time_rate_plot_url }}" alt="On-Time Delivery Rate Pie Chart">
+        {% else %}
+            <p>No data available for On-Time Delivery Rate.</p>
+        {% endif %}
+    </div>
+
+    <a href="{{ url_for('admin_dashboard') }}" class="btn">Back to Dashboard</a>
+</body>
+</html>

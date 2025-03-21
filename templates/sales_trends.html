@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Sales Trends{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/sales_trends.css') }}">
+{% endblock %}
+{% block content %}
+<div class="main">
+    <h1>Sales Trends</h1>
+
+    {% if plot_url %}
+    <img src="data:image/png;base64,{{ plot_url }}" alt="Sales Trends Chart">
+    {% else %}
+    <p>No chart available.</p>
+    {% endif %}
+
+    <form method="POST" action="{{ url_for('sales_trends') }}">
+        <div>
+            <label for="period">Period:</label>
+            <select id="period" name="period">
+                <option value="daily">Daily</option>
+                <option value="weekly">Weekly</option>
+                <option value="monthly">Monthly</option>
+            </select>
+        </div>
+        
+        
+        
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <button type="submit">Generate Chart</button>
+    </form>
+    <br>
+    <br>
+    <a href="{{ url_for('restaurant_dashboard') }}" class="btn">Back to Dashboard</a>
+</div>
+{% endblock %}

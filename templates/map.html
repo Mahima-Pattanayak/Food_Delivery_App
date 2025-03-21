@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Route Finder</title>
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!-- Leaflet Routing Machine CSS and JS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css">
+    <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        #map {
+            height: 500px;
+            width: 100%;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            padding: 20px;
+            text-align: center;
+        }
+        input {
+            margin: 5px;
+            padding: 8px;
+            width: 200px;
+        }
+        button {
+            padding: 8px 15px;
+        }
+    </style>
+</head>
+<nav class="navbar">
+                
+    <div class="navbar-logo">
+        <a href="/">
+            <img src="https://res.cloudinary.com/dx6kfgfal/image/upload/v1736183862/Hifi_logo_zwjwbd.png" 
+                 alt="HiFi Eats Logo" 
+                 style="height: 50px;">
+        </a>
+        <h1 style="color: #000000;">Delivery Agent Dashboard</h1>
+    </div>
+    <ul class="navbar-links">
+        <li><a href="/delivery_agent_dashboard/{{ agent_id }}"><i class="material-icons">home</i> Home</a></li>
+        <li><a href="/orders/{{ agent_id }}"><i class="material-icons">list</i> Orders</a></li>
+        <li><a href="/route/{{ agent_id }}"><i class="material-icons">map</i> Route</a></li>
+        <li><a href="/performance/{{ agent_id }}"><i class="material-icons">assessment</i> Performance</a></li>
+        <li><a href="/report_issue/{{ agent_id }}"><i class="material-icons">report_problem</i> Report Issue</a></li>
+    </ul>
+
+</nav>
+
+<body>
+    <div class="container">
+        <h1>Route Finder</h1>
+        <input type="text" id="currentLocation" placeholder="Enter current location">
+        <input type="text" id="destinedLocation" placeholder="Enter destination">
+        <button onclick="findRoute()">Find Route</button>
+    </div>
+    <div id="map"></div>
+
+    <script>
+        // Initialize the map
+        let map = L.map('map').setView([0, 0], 2); // Default to world view
+
+        // Add OpenStreetMap tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Routing control variable
+        let routingControl = null;
+
+        // Function to find the route
+        function findRoute() {
+            const currentLocation = document.getElementById('currentLocation').value;
+            const destinedLocation = document.getElementById('destinedLocation').value;
+
+            if (!currentLocation || !destinedLocation) {
+                alert("Please enter both current and destination locations!");
+                return;
+            }
+
+            // Geocode both locations
+            Promise.all([
+                geocodeLocation(currentLocation),
+                geocodeLocation(destinedLocation)
+            ]).then(([currentCoords, destinedCoords]) => {
+                if (currentCoords && destinedCoords) {
+                    // Set map view to current location
+                    map.setView(currentCoords, 12);
+
+                    // Clear existing route if any
+                    if (routingControl) {
+                        map.removeControl(routingControl);
+                    }
+
+                    // Add routing control
+                    routingControl = L.Routing.control({
+                        waypoints: [
+                            L.latLng(currentCoords[0], currentCoords[1]),
+                            L.latLng(destinedCoords[0], destinedCoords[1])
+                        ],
+                        routeWhileDragging: true
+                    }).addTo(map);
+
+                } else {
+                    alert("One or both locations could not be found. Please try again.");
+                }
+            }).catch(error => {
+                console.error("Error finding route:", error);
+                alert("An error occurred. Please try again.");
+            });
+        }
+
+        // Function to geocode a location using Nominatim API
+        function geocodeLocation(locationName) {
+            const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(locationName)}`;
+            return fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.length > 0) {
+                        return [data[0].lat, data[0].lon]; // Return [latitude, longitude]
+                    }
+                    return null; // Location not found
+                })
+                .catch(error => {
+                    console.error("Error geocoding location:", error);
+                    return null;
+                });
+        }
+    </script>
+</body>
+</html>

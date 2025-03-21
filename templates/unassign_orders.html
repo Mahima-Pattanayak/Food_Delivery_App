@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}Unassigned Orders dashboard{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/unassigned_orders.css') }}">
+{% endblock %}
+
+{% block content %}
+
+            <div class="orders-section">
+                <h2>Unassigned Orders</h2>
+                <table class="orders-table">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Customer</th>
+                            <th>Amount</th>
+                            <th>Address</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in orders %}
+            <tr>
+                <td>{{ order.order_id }}</td>
+                <td>{{ order.full_name }}</td>
+                <td>{{ order.total_price }}</td>
+                <td>{{order.delivery_location}}</td>
+                    <td>
+                        <a href="{{ url_for('agent_assignment_dashboard', order_id=order.order_id) }}" class="assign-btn">Assign</a>
+                    </td>
+            </tr>
+            {% endfor %}
+                    </tbody>
+                </table>
+                {% if not view_more %}
+                <a href="{{ url_for('view_more_orders') }}" class="view-more-btn">View More</a>
+                {% endif %}
+
+{% endblock %}

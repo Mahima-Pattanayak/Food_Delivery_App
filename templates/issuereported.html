@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}Reported Issues{% endblock %}
+
+{% block extra_css %}
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/issuereported.css.css') }}"> -->
+    <link rel="stylesheet" href="static/css/issuesreported.css">
+
+{% endblock %}
+{% block content %}
+    <div class="dashboard-container">
+        <main class="dashboard-main">
+            <h2>Issues Reported by Delivery Agents</h2>
+            <div class="issues-overview">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Issue ID</th>
+                            <th>Order ID</th>
+                            <th>Issue Type</th>
+                            <th>Description</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for issue in issues %}
+                        <tr>
+                            <td>{{ issue['id'] }}</td>
+                            <td>{{ issue['order_id'] }}</td>
+                            <td>{{ issue['issue_type'] }}</td>
+                            <td>{{ issue['description'] }}</td>
+                            <td>
+                                <!-- Form to delete the issue -->
+                                <form action="/resolve/{{issue['id']}}" method="POST">
+                                    <button type="submit" class="btn resolve-btn">Resolve</button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+{% endblock %}

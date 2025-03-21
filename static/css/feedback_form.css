@@ -1,0 +1,92 @@
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('/static/images/food.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+.feedback-container {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    padding: 20px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+h1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 24px;
+    color: black;
+    margin-bottom: 20px;
+}
+h1 img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+.form-group {
+    margin-bottom: 15px;
+    width: 100%;
+}
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: black;
+    font-weight: 500;
+}
+.star-rating {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    direction: rtl;
+    margin: 10px 0;
+}
+.star-rating input {
+    display: none;
+}
+.star-rating label {
+    font-size: 30px;
+    color: gray;
+    cursor: pointer;
+}
+.star-rating input:checked ~ label,
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+    color: gold;
+}
+textarea {
+    width: 80%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    resize: vertical;
+    min-height: 80px;
+    margin: 0 auto;
+    display: block;
+}
+button {
+    background: #f7941d;
+    color: white;
+    padding: 10px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+    transition: background 0.3s ease;
+}
+button:hover {
+    background: #f57200;
+}

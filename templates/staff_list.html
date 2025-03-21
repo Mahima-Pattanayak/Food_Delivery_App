@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+
+{% block title %}Orders Overview{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/staff_list.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="header">
+    <button class="back-btn">←</button>
+    <h1>Agent Details</h1>
+</div>
+
+<input type="text" placeholder="Search here" class="search-bar">
+<div class="content-wrapper">
+    <div class="staff-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Agent Name</th>
+                    <th>Agent ID</th>
+                    <th>Email ID</th>
+                    <th>Ph. No</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for staff in staff_data %}
+                <tr>
+                    <td><a href="{{ url_for('staff_details', agent_id=staff.id) }}" class="staff-name">{{ staff.name }}</a></td>
+                    <td>#{{ staff.id }}</td>
+                    <td>{{ staff.email }}</td>
+                    <td>{{ staff.phone }}</td>
+                    <td>{{ staff.status }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="filters">
+        <div class="filter-title">Apply Filters</div>
+        <div class="filter-item">
+            <input type="checkbox" id="agent-id">
+            <label for="agent-id">Agent ID</label>
+        </div>
+        <div class="filter-item">
+            <input type="checkbox" id="agent-name">
+            <label for="agent-name">Agent Name</label>
+        </div>
+        <div class="filter-item">
+            <input type="checkbox" id="status">
+            <label for="status">Status</label>
+        </div>
+        <div class="action-buttons">
+            <a href="" class="action-button add">Add an Agent +</a>
+            <a href="" class="action-button remove">Remove an Agent -</a>
+        </div>
+    </div>
+</div>
+
+<!-- Add Staff Modal -->
+<div id="addStaffModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Add New Staff</h2>
+        <form id="addStaffForm">
+            <div class="form-group">
+                <label for="agentName">Agent Name:</label>
+                <input type="text" id="agentName" name="agentName" required>
+            </div>
+            <div class="form-group">
+                <label for="agentPhone">Phone Number:</label>
+                <input type="tel" id="agentPhone" name="agentPhone" required>
+            </div>
+            <div class="form-group">
+                <label for="agentEmail">Email:</label>
+                <input type="email" id="agentEmail" name="agentEmail" required>
+            </div>
+            <button type="submit" class="modal-button">Add Agent</button>
+        </form>
+    </div>
+</div>
+
+<!-- Remove Staff Modal -->
+<div id="removeStaffModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Remove Staff</h2>
+        <form id="removeStaffForm">
+            <div class="form-group">
+                <label for="removeAgentId">Agent ID:</label>
+                <input type="text" id="removeAgentId" name="removeAgentId" required>
+            </div>
+            <div class="form-group">
+                <label for="removeAgentName">Agent Name:</label>
+                <input type="text" id="removeAgentName" name="removeAgentName" required>
+            </div>
+            <button type="submit" class="modal-button">Remove Agent</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/staff_list.js') }}"></script>
+{% endblock %}

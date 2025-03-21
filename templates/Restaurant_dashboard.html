@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+{% endblock %}
+{% block content %}
+ 
+<div class="header">
+    <div class="hamburger" onclick="toggleSidebar()">
+        <i class="fas fa-bars"></i>
+    </div>
+    <div class="header-content">
+        <h1>Admin Dashboard</h1>
+        <div class="user-info">
+            <h3>Hi, Admin</h3>
+            <img class="avatar" src="https://www.w3schools.com/w3images/avatar2.png" alt="User Avatar" width="40">
+        </div>
+    </div>
+</div>
+<div id="mainContent">
+    <!-- <div class="dashboard-header">
+        <h1>Admin Dashboard</h1>
+    </div> -->
+
+    <div class="ipo-stats-container">
+        <div class="ipo-stats">
+            <div class="ipo-box gain">
+                <h3>Gains For November</h3>
+                <p>50%</p>
+            </div>
+            <div class="ipo-box loss">
+                <h3>Losses for November</h3>
+                <p>30%</p>
+            </div>
+            <div class="ipo-box total">
+                <h3>Total in November</h3>
+                <p>80%</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="quick-links">
+        <h2>Records</h2>
+        <ul>
+            <li><i class="fas fa-chart-bar"></i><a href="#">Customer Management</a></li>
+            <li><i class="fas fa-clipboard-list"></i><a href="#">Customer Data</a></li>
+            <li><i class="fas fa-calendar-day"></i><a href="https://topsellingitemsgit-5s7m9ai4y33migxf7xskvh.streamlit.app/">Product Performance</a></li>
+            <li><i class="fas fa-comments"></i><a href="#">Sentiment Analysis Reports</a></li>
+        </ul>
+    </div>
+
+    <div class="quick-links">
+        <h2>Important Links</h2>
+        <p>Find direct links to view sales data, insights, revenue generation, and customer records</p>
+        <ul>
+            <li><i class="fas fa-chart-bar"></i><a href="{{ url_for('customer_purchases') }}">Customer Purchases</a></li>
+            <li><i class="fas fa-clipboard-list"></i><a href="{{ url_for('revenue_metrics') }}">Revenue Generated</a></li>
+            <li><i class="fas fa-calendar-day"></i><a href="{{ url_for('order_frequency') }}">Customer Order Frequency</a></li>
+            <li><i class="fas fa-comments"></i><a href="{{ url_for('delivery_metrics') }}">Delivery Metrics</a></li>
+        </ul>
+    </div>
+
+    <div class="ipo-stats-container">
+        <div class="main-board-ipo">
+            <div class="chart">
+                <canvas id="donutChart"></canvas>
+                <h3>Popular Items</h3>
+            </div>
+            <div class="chart">
+                <canvas id="stockPriceChart"></canvas>
+                <h3>Sales Report</h3>
+            </div>
+            <div class="chart">
+                <canvas id="ipoPerformanceChart"></canvas>
+                <h3>Delivery Metrics</h3>
+            </div>
+            <div class="chart">
+                <canvas id="volumeChart"></canvas>
+                <h3>Sentiment Analysis</h3>
+            </div>
+        </div>
+    </div>
+</div>
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{{ url_for('static', filename='js/Restaurant_dashboard.js') }}"></script>
+{% endblock %}
+
+{% endblock %}

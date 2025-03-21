@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block title %}Orders Overview{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/order_overview.css') }}">
+{% endblock %}
+{% block content %}
+<h1 style="margin-left: 20px;">Orders Overview</h1><br>
+            <div class="stats-grid">
+                <div class="stat-card green">
+                    <h3>Total Orders</h3>
+                    <div class="stat-value">0</div>
+                </div>
+                <div class="stat-card pink">
+                    <h3>Yearly Orders</h3>
+                    <div class="stat-value">0</div>
+                </div>
+                <div class="stat-card purple">
+                    <h3>Monthly Orders</h3>
+                    <div class="stat-value">0</div>
+                </div>
+                <div class="stat-card blue">
+                    <h3>Daily Orders</h3>
+                    <div class="stat-value">0</div>
+                </div>
+            </div>
+            <!-- Modify the charts-container section in index.html -->
+            <div class="charts-container">
+                <div class="chart-section">
+                    <div class="chart-header">
+                        <h2>Order Status</h2>
+                        <div class="date-control">
+                            <input type="date" id="dailyDatePicker" class="date-picker">
+                        </div>
+                    </div>
+                    <canvas id="statusChart"></canvas>
+                </div>
+                
+                <div class="chart-section">
+                    <div class="chart-header">
+                        <h2>Weekly Status</h2>
+                        <div class="date-control">
+                            <input type="date" id="weeklyDatePicker" class="date-picker">
+                            <span class="date-range" id="weekRange"></span>
+                        </div>
+                    </div>
+                    <canvas id="weeklyChart"></canvas>
+                </div>
+                
+                <div class="chart-section">
+                    <div class="chart-header">
+                        <h2>Monthly Orders</h2>
+                        <div class="date-control">
+                            <select id="monthPicker" class="month-picker">
+                                <option value="2024-01">January 2024</option>
+                                <option value="2024-02">February 2024</option>
+                                <!-- Add more months as needed -->
+                            </select>
+                        </div>
+                    </div>
+                    <canvas id="monthlyChart"></canvas>
+                </div>
+                
+                <div class="chart-section">
+                    <div class="chart-header">
+                        <h2>Yearly Orders</h2>
+                        <div class="date-control">
+                            <select id="yearPicker" class="year-picker">
+                                <option value="2024">2024</option>
+                                <option value="2023">2023</option>
+                                <option value="2022">2022</option>
+                            </select>
+                        </div>
+                    </div>
+                    <canvas id="yearlyChart"></canvas>
+                </div>
+            </div>
+ {% endblock %}
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/order_overview.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+{% endblock %}

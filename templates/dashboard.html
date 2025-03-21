@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Delivery Agent Dashboard{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-logo">
+            <a href="/">
+                <img src="https://res.cloudinary.com/dx6kfgfal/image/upload/v1736183862/Hifi_logo_zwjwbd.png" 
+                     alt="HiFi Eats Logo" 
+                     style="height: 50px;">
+            </a>
+            <h1 style="color: #000000;">Delivery Agent Dashboard</h1>
+        </div>
+        <ul class="navbar-links">
+            <li><a href="/delivery_agent_dashboard/{{ agent_id }}"><i class="material-icons">home</i> Home</a></li>
+            <li><a href="/orders/{{ agent_id }}"><i class="material-icons">list</i> Orders</a></li>
+            <li><a href="/route/{{ agent_id }}"><i class="material-icons">map</i> Route</a></li>
+            <li><a href="/performance/{{ agent_id }}"><i class="material-icons">assessment</i> Performance</a></li>
+            <li><a href="/report_issue/{{ agent_id }}"><i class="material-icons">report_problem</i> Report Issue</a></li>
+        </ul>
+        <form id="status-form" style="display: inline-block; margin-left: 20px;">
+            <label for="agent_status" style="color: #000; font-weight: bold; margin-right: 10px;">Your Status:</label>
+            <select id="agent_status" name="agent_status">
+                <option value="On Delivery">On Delivery</option>
+                <option value="Available">Available</option>
+                <option value="Not at Work">Not at Work</option>
+            </select>
+        </form>
+    </nav>
+
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <h2>Dashboard Overview</h2>
+        </header>
+
+        <div class="stats-cards">
+            <div class="card">
+                <h3>Total Orders</h3>
+                <p>{{ stats['total_orders'] }}</p>
+            </div>
+            <div class="card">
+                <h3>Completed Orders</h3>
+                <p>{{ stats['completed_orders'] }}</p>
+            </div>
+            <div class="card">
+                <h3>Canceled Orders</h3>
+                <p>{{ stats['canceled_orders'] }}</p>
+            </div>
+            <div class="card">
+                <h3>Delayed Orders</h3>
+                <p>{{ stats['delayed_orders'] }}</p>
+            </div>
+        </div>
+
+        <main class="dashboard-main">
+            <section class="assigned-orders">
+                <h2>Assigned Orders Overview</h2>
+                <div class="order-cards">
+                    {% if orders %}
+                        {% for order in orders %}
+                        <div class="order-card">
+                            <h4>Order #{{ order['order_id'] }}</h4>
+                            <p><strong>Customer ID:</strong> {{ order['customer_id'] }}</p>
+                            <p><strong>Total Price:</strong> ${{ order['total_price'] }}</p>
+                            <p><strong>Location:</strong> {{ order['delivery_location'] }}</p>
+                            <p><strong>Status:</strong>
+                               <span class="status {{ order['order_status']|lower|replace(' ', '-') }}">
+                                   {{ order['order_status'] }}
+                               </span>
+                            </p>
+                            <p><strong>Order Date:</strong> {{ order['order_date'] }}</p>
+                            <p><strong>Order Time:</strong> {{ order['order_time'] }}</p>
+                            <div class="order-actions">
+                                <form action="/update_status/{{ order['order_id'] }}" method="post">
+                                    <select name="new_status">
+                                        <option value="New">New</option>
+                                        <option value="In Progress">In Progress</option>
+                                        <option value="Completed">Completed</option>
+                                        <option value="Delayed">Delayed</option>
+                                        <option value="Canceled">Canceled</option>
+                                    </select>
+                                    <button type="submit" class="btn update-btn">Update Status</button>
+                                </form>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <p>No orders assigned at the moment.</p>
+                    {% endif %}
+                </div>
+            </section>
+
+            <!-- Flash Messages -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            <div id="flash-container">
+                {% for category, message in messages %}
+                <div class="flash-message {{ category }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+            <script>
+                setTimeout(() => {
+                    const flashContainer = document.getElementById('flash-container');
+                    if (flashContainer) {
+                        flashContainer.style.display = 'none';
+                    }
+                }, 3000); // Hide the flash message after 3 seconds
+            </script>
+            {% endif %}
+            {% endwith %}
+        </main>
+    </div>
+
+    <script>
+        document.getElementById('agent_status').addEventListener('change', function() {
+            const agentStatus = this.value;
+            const agentId = 1; // Replace with actual agent ID from session or db
+
+            fetch('/update_agent_status', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ id: agentId, status: agentStatus }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message) {
+                    alert(data.message);
+                } else if (data.error) {
+                    alert('Error: ' + data.error);
+                }
+            })
+            .catch(error => {
+                alert('Error: ' + error);
+            });
+        });
+    </script>
+</body>
+</html>

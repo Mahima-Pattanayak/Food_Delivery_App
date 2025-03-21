@@ -1,0 +1,439 @@
+body, h1, p, ul, li {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        box-sizing: border-box;
+    }
+    h2{
+        margin-top: 0;
+        font-size: 24px;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        background: #ffe6e698;
+    }
+
+    /* Container */
+    .container {
+        display: flex;
+        flex-wrap: nowrap;
+        height: 100vh;
+        position: relative;
+    }
+
+    /* Sidebar */
+    .sidebar {
+        width: 250px;
+        background: rgb(255, 142, 142);
+
+        color: white;
+        height: 100vh;
+        padding: 20px 10px;
+        transition: width 0.3s ease, background 0.3s ease;
+        position: fixed;
+        left: 0;
+        top: 0;
+        z-index: 100;
+    }
+
+    .sidebar:hover {
+        background: #ff8282;
+    }
+
+    .sidebar .logo {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 24px;
+        font-weight: bold;
+        
+    }
+
+    .sidebar .menu ul {
+        padding: 0;
+    }
+
+
+    .sidebar .menu ul li {
+    width: 100%; /* Ensures the menu items take the full width of the sidebar */
+    transition: all 0.3s ease; /* Smooth transition for both text and width */
+    padding: 10px 20px; /* Add some padding for the initial size of the rectangle */
+    
+     }
+
+    .sidebar .menu ul li a {
+        display: block;
+        font-size: 16px;
+        transition: font-size 0.3s ease; /* Smooth transition for text size */
+        text-decoration: none;
+    }
+
+    .sidebar .menu ul li:hover {
+        background-color: rgb(255, 84, 84);
+        border-radius: 5%;
+        transform: scale(1.1); /* Enlarge the entire item slightly */
+        padding: 12px 25px; /* Increase the padding to make the rectangle larger */
+    }
+
+    .sidebar .menu ul li:hover a {
+        font-size: 18px; /* Increase the font size of the text */
+    }
+
+
+    .sidebar .menu ul li a i {
+        margin-right: 10px;
+        color: yellow;
+    }
+
+    .sidebar .menu ul li a.active {
+        font-weight: bold;
+    }
+
+    /* Main Content */
+    .main-content {
+        flex: 1;
+        padding: 20px;
+        transition: padding 0.3s ease;
+        margin-left: 250px;
+        transition: margin-left 0.3s ease;
+    }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+     .header .search-bar {
+        background-color:rgb(255, 255, 196);
+        padding: 10px;
+        width: 700px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        transition: width 0.3s ease;
+        text-align: left; /* Align text inside the search bar */
+        display: block; /* Ensures the element is block-level (occupying full width) */
+        margin-right: 50vh; /* Aligns the search bar to the left */
+        }
+
+
+    .header .search-bar:focus {
+        width: 350px;
+        border-color: #007bff;
+    }
+
+    .header .user-info {
+        display: flex;
+        align-items: center;
+        transition: opacity 0.3s ease;
+    }
+
+    .header .user-info .avatar {
+        border-radius: 50%;
+        margin-left: 10px;
+        transition: transform 0.3s ease;
+    }
+
+    .header .user-info:hover .avatar {
+        transform: rotate(360deg);
+    }
+
+    .dashboard-header h1 {
+        margin-bottom: 20px;
+        animation: fadeIn 1s ease-out;
+        margin-left: 10px;
+    }
+
+            /* IPO Stats */
+            /* Larger Box for IPO Stats */
+    .ipo-stats-container {
+        background: #ffffff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        margin-left: 10px;
+    }
+
+    /* IPO Stats Layout */
+    .ipo-stats {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        margin-left:10px;
+    }
+
+    /* Individual IPO Box Styles */
+    .ipo-box {
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        flex: 1;
+        color: white;
+        padding: 40px;
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .ipo-box:hover {
+        transform: scale(1.05);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .ipo-box.gain {
+        background: #28a745;
+    }
+
+    .ipo-box.loss {
+        background: #dc3545;
+    }
+
+    .ipo-box.total {
+        background: #ffc107;
+    }
+
+
+    .ipo-box.gain {
+        background: #28a745;
+    }
+
+    .ipo-box.loss {
+        background: #dc3545;
+    }
+
+    .ipo-box.total {
+        background: #ffc107;
+    }
+
+            /* Quick Links */
+    .quick-links {
+        background: #ffffff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        margin-left: 10px;
+    }
+
+    .quick-links h2 {
+        margin-bottom: 15px;
+    }
+
+    .quick-links ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        justify-content: flex-start;
+        padding: 0; /* Ensure no extra padding is applied to the ul */
+        margin: 0; /* Remove any default margin */
+    }
+
+    .quick-links ul li {
+        display: flex;
+        align-items: center;
+        background: #f1f1f1;
+        padding: 10px 15px; /* Ensure even padding */
+        border-radius: 10px;
+        width: 200px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease; /* Add smooth transition for box-shadow */
+    }
+
+    .quick-links ul li:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15); /* Add subtle shadow effect on hover */
+    }
+
+    .quick-links ul li i {
+        font-size: 24px;
+        margin-right: 10px;
+        transition: color 0.3s ease;
+    }
+
+    .quick-links ul li a {
+        text-decoration: none;
+        color: #007bff;
+        font-size: 16px;
+        display: block;
+        transition: color 0.3s ease;
+    }
+
+    .quick-links ul li:hover i {
+        color: #fee337; /* Yellow color on hover for icon */
+    }
+
+    .quick-links ul li a:hover {
+        color: #0056b3; /* Darker blue for the link */
+    }
+        .hamburger {
+              /* Hidden by default */
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 30px;
+            color: #333;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .hamburger i{
+            display:none;
+        }
+
+
+    /* Main Board IPO */
+    .main-board-ipo .chart {
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .main-board-ipo .donut-chart {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background: conic-gradient(#28a745 0% 50%, #ffc107 50% 75%, #dc3545 75% 100%);
+        transition: transform 0.5s ease;
+    }
+
+    .main-board-ipo .donut-chart:hover {
+        transform: rotate(360deg);
+    }
+
+    .logo h2 {
+        color: #ffffff; /* Change this to a color that makes the text visible */
+        text-align: left;
+    }
+
+    .dashboard-header h1{
+        margin-left:10px;
+    }
+
+
+                /* Layout for Charts */
+        .main-board-ipo {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        /* Individual Chart Styling */
+        .chart {
+            background: #f8fad3;
+            padding: 20px;
+            border-radius: 10px;
+            flex: 1;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(77, 0, 0, 0.503);
+        }
+
+        /* Styling for Titles */
+        .chart h3 {
+            margin-top: 15px;
+        }
+
+        /* Placeholder styles for the charts */
+        .donut-chart, .stock-price-chart, .ipo-performance-chart, .volume-chart {
+            width: 50%;
+            height: 200px;
+            background: #e0e0e0; /* Light gray for placeholder */
+            border-radius: 10px;
+            margin-bottom: 15px;
+            display:flex;
+        }
+        
+        .chart {
+            position: relative;
+            height: 300px; /* Set the height as required */
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+
+        .chart canvas {
+            width: 100%;
+            height: 100px;
+        }
+
+
+    /* Animation */
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+            transform: translateY(-30px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @media (max-width: 1024px) {
+        .sidebar {
+            width: 200px;
+            margin-left: 0;
+        }
+
+        .main-content {
+            margin-left: 200px;
+        }
+    }
+
+    /* Small screens (Tablets and smaller devices: max-width 768px) */
+    @media (max-width: 768px) {
+        .hamburger {
+            display: block;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            transform: translateY(-100%);
+            background-color: blue;
+            z-index: 1000;
+            height: 100%;
+            padding-top: 50px;
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar.open {
+            transform: translateY(0);
+        }
+
+        .main-content {
+            margin-left: 0;
+            padding-top: 50px;
+        }
+
+        .header .search-bar {
+            width: 80%;
+            margin-left: 10px;
+        }
+    }
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 20px;
+}
+
+.header-content h1 {
+    margin: 0;
+}
+
+.header .user-info {
+    display: flex;
+    align-items: center;
+}
+
+.header .user-info h3 {
+    margin: 0 10px 0 0;
+}

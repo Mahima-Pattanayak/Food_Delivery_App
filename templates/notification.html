@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Received Notification</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <h1 style="text-align: center; background: linear-gradient(to right, #FF5F1F, #ff94ad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-size: 2.5rem; margin-bottom: 2rem; padding-top: 1rem;">Received Notification</h1>
+            <nav class="navbar">
+            <div class="navbar-logo">
+                <a href="/">
+                    <img src="https://res.cloudinary.com/dx6kfgfal/image/upload/v1736183862/Hifi_logo_zwjwbd.png" 
+                         alt="HiFi Eats Logo" 
+                         style="height: 50px;">
+                </a>
+                <h1 style="color: #000000;">Delivery Agent Dashboard</h1>
+            </div>
+            <ul class="navbar-links">
+                <li><a href="/"><i class="material-icons">home</i> Home</a></li>
+                <li><a href="/orders"><i class="material-icons">list</i> Orders</a></li>
+                <li><a href="/route"><i class="material-icons">map</i> Route</a></li>
+                <li><a href="/performance"><i class="material-icons">assessment</i> Performance</a></li>
+                <li><a href="/report_issue"><i class="material-icons">report_problem</i> Report Issue</a></li>
+            </ul>
+            </nav>
+        </header>
+
+        <main class="dashboard-main">
+            <h2>Notification arrived for Delivery Agent</h2>
+            <div class="issues-overview">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Notification ID</th>
+                            <th>Message</th>
+                            <th>Notification Type</th>
+                            <th>Created At</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for notification in notifications %}
+                        <tr>
+                            <td>{{ notification['id'] }}</td>
+                            <td>{{ notification['message'] }}</td>
+                            <td>{{ notification['type'] }}</td>
+                            <td>{{ notification['created_at'] }}</td>
+                            <td>
+                                <!-- Form to delete the issue -->
+                                <form action="" method="POST">
+                                    <button type="submit" class="btn resolve-btn">Read</button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,98 @@
+
+h1 {
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+    margin-left: 20px;
+}
+
+.stat-card {
+    padding: 25px;
+    border-radius: 15px;
+    color: black;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.stat-card h3 {
+    margin-bottom: 15px;
+    font-size: 1.1em;
+    color: #444;
+}
+
+.stat-value {
+    font-size: 2.2em;
+    font-weight: bold;
+    text-align: right;
+}
+
+.green { background-color: #98FB98; }
+.pink { background-color: #FFB6C1; }
+.purple { background-color: #DDA0DD; }
+.blue { background-color: #87CEEB; }
+
+.charts-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    margin-left: 20px;
+}
+
+.chart-section {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.chart-section:hover {
+    transform: translateY(-3px);
+}
+
+.chart-section h2 {
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 1.4em;
+}
+
+canvas {
+    width: 100% !important;
+    height: auto !important;
+    margin: 0 auto;
+}
+
+/* Loading State */
+.loading {
+    position: relative;
+    opacity: 0.7;
+}
+
+.loading::after {
+    content: "Loading...";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.2em;
+    color: #666;
+}
+
+/* Error State */
+.error-state {
+    padding: 20px;
+    text-align: center;
+    color: #d32f2f;
+    font-size: 1.1em;
+}

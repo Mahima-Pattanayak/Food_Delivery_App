@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Data</title>
+</head>
+<body>
+    <h1>Upload Data</h1>
+    <form method="POST" action="{{ url_for('upload') }}" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <button type="submit">Upload CSV</button>
+    </form>
+    <form method="POST" action="{{ url_for('upload') }}">
+        <textarea name="text" rows="4" cols="50" placeholder="Enter feedback text"></textarea><br>
+        <button type="submit">Analyze Text</button>
+    </form>
+</body>
+</html>

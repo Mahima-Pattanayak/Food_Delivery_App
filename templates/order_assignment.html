@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% block title %}Agents Assignment Dashboard{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/order_assignment.css') }}">
+{% endblock %}
+
+{% block content %}
+<!-- Available Agents Section -->
+<div class="section-box agents-section">
+    <h2>Available Agents</h2>
+    <table class="agents-table">
+        <thead>
+            <tr>
+                <th>Agent ID</th>
+                <th>Status</th>
+                <th>Order Count</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for agent in agents %}
+            <tr>
+                <td>{{ agent.id }}</td>
+                <td>{{ agent.status }}</td>
+                <td>{{agent.order_count}}</td>
+                <td>
+                    <form method="POST" action="{{ url_for('assign_agent', order_id=order_id, agent_id=agent.id) }}" 
+                       data-order-id="{{ order_id }}" data-agent-id="{{ agent.id }}">
+                       <button type="button" class="assign-btn">Assign</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Bottom Section -->
+<div class="bottom-sections">
+    <!-- Recent Activity Section -->
+    <div class="section-box recent-activity">
+        <h2>Recent Activity</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>S.NO</th>
+                    <th>Order no</th>
+                    <th>Assigned</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for activity in recent_activities %}
+                <tr>
+                    <td>{{ activity.S_No }}</td>
+                    <td>{{ activity.order_id }}</td>
+                    <td>{{ activity.agent_id or 'Unassigned' }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Analytics Summary Section -->
+    <div class="section-box analytics-summary">
+        <br><h2 style="text-align: center;">Analytics Summary</h2><br><br>
+        <div class="analytics-grid">
+            <div class="analytics-item">
+                <h3>Unassigned Orders</h3>
+                <p>{{ analytics_summary.unassigned_orders }}</p>
+            </div>
+            <div class="analytics-item">
+                <h3>Idle Agents</h3>
+                <p>{{ analytics_summary.idle_agents }}</p>
+            </div>
+            <div class="analytics-item">
+                <h3>Active Deliveries</h3>
+                <p>{{ analytics_summary.active_deliveries }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/order_assignment.js') }}"></script>
+{% endblock %}

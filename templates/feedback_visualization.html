@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block title %}Feedback Visualization{% endblock %}
+{% block content %}
+    <div class="graphs-container" style="margin-top: 0;"> <!-- Remove top margin -->
+        <div class="graph-heading" style="text-align: left;">
+            <h1>Feedback Analysis</h1>
+        </div>
+        <div class="average-rating" style="text-align: center;"></div>
+            <h2>Average Rating: {{ average_rating }}</h2>
+            <br>
+        </div>
+        <div class="graph-item">
+            <h3>Rating Distribution:</h3>
+            {{ rating_plot_div | safe }}
+        </div>
+        <br>
+        <br>
+        <br>
+        <div class="graph-item">
+            <h3>Sentiment Distribution:</h3>
+            {{ sentiment_plot_div | safe }}
+        </div>
+        <br>
+        <br>
+        <br>
+        <div class="graph-item">
+            <h3>Distribution of Sentiments in Feedback:</h3>
+            {{ sentiment_pie_chart_path | safe }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    h1 {
+        text-align: left;
+        color: #4CAF50;
+    }
+    h2 {
+            color: #333;
+    }
+    div.container
+    {
+        height: max-content;
+        background-color: rgb(255, 255, 196);
+    }
+    body {
+        font-family: Arial, sans-serif;
+        background: #f0f0f0;
+        margin: 0;
+        padding: 0;
+    }
+    .container {
+        width: 80%;
+        margin: 20px auto;
+        padding: 20px;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .graphs-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+    .graph-item {
+        width: 100%; /* Make the graph items take full width */
+        max-width: 800px;
+        background: #f9f9f9;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+    .graph-heading {
+        text-align: left;
+        width: 100%;
+    }
+    .average-rating {
+        text-align: center;
+        width: 100%;
+    }
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+{% endblock %}

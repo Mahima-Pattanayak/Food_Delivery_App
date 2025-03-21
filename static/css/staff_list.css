@@ -1,0 +1,205 @@
+.header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+    padding: 15px;
+}
+
+.back-btn {
+    font-size: 18px;
+    padding: 5px 10px;
+    cursor: pointer;
+    background-color: #ff704d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+h1 {
+    margin: 0;
+    font-size: 24px;
+}
+.search-bar {
+    padding: 10px;
+    width: 100%;
+    max-width: 950px;
+    border: 1px solid #b5b3b3;
+    border-radius: 5px;
+    margin: 10px 0;
+}
+.content-wrapper {
+    display: flex;
+    gap: 20px;
+}
+.staff-table {
+    flex: 1;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+.staff-name {
+    color: #000;
+    text-decoration: none;
+}
+.staff-name:hover {
+    text-decoration: underline;
+}
+.view-more {
+    display: inline-block;
+    padding: 5px 15px;
+    background-color: #c17f59;
+    color: white;
+    text-decoration: none;
+    border-radius: 15px;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+/* Filter Styles */
+.filters {
+    width: 250px;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+    height: fit-content;
+}
+.filter-title {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+.filter-item {
+    margin: 15px 0;
+    display: flex;
+    align-items: center;
+}
+.filter-item input[type="checkbox"] {
+    display: none;
+}
+.filter-item label {
+    position: relative;
+    padding-left: 35px;
+    cursor: pointer;
+    font-size: 16px;
+    user-select: none;
+}
+.filter-item label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    border: 2px solid #c17f59;
+    background-color: white;
+    border-radius: 3px;
+}
+.filter-item input[type="checkbox"]:checked + label:before {
+    background-color: #c17f59;
+}
+.filter-item input[type="checkbox"]:checked + label:after {
+    content: '✓';
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    font-size: 14px;
+}
+.action-buttons {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.action-button {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    background-color: #ff4444;
+    transition: background-color 0.3s;
+}
+.action-button:hover {
+    background-color: #ff6666;
+}
+
+/* Add this to your staff_list.css file */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 8px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: black;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.modal-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.modal-button:hover {
+    background-color: #45a049;
+}

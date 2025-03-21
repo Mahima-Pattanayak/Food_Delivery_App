@@ -1,0 +1,32 @@
+﻿{% extends 'base.html' %}
+
+{% block title %}Notifications{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin_notifications.css') }}">
+{% endblock %}
+{% block content %}
+    <div class="header-image"></div>
+    <div class="notification-container">
+        <div class="notification-header">NOTIFICATIONS</div>
+        <div class="notification-item">
+            <div class="notification-icon">🔔</div>
+            <div class="notification-text">New table reservation for tonight at 7 PM.</div>
+        </div>
+        <div class="notification-item">
+            <div class="notification-icon">🔔</div>
+            <div class="notification-text">Inventory alert: Low stock of tomatoes.</div>
+        </div>
+        <div class="notification-item">
+            <div class="notification-icon">🔔</div>
+            <div class="notification-text">Order #4567 has been placed successfully.</div>
+        </div>
+        <div class="notification-item">
+            <div class="notification-icon">🔔</div>
+            <div class="notification-text">Customer feedback received: "Great service and delicious food!"</div>
+        </div>
+        <div class="notification-item">
+            <div class="notification-icon">🔔</div>
+            <div class="notification-text">Reminder: Staff meeting scheduled for tomorrow at 3 PM.</div>
+        </div>
+    </div>
+{% endblock %}

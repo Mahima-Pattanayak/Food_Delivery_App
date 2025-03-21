@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}Performance Metrics{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/performance_metrics.css') }}">
+{% endblock %}
+{% block content %}
+<h2>Delivery Agent Performance</h2>
+            
+            <!-- Controls -->
+            <div class="controls">
+                <div class="control-group">
+                    <label for="agentSelect">Select Delivery Agent:</label>
+                    <select id="agentSelect">
+                        <option value="">All Agents</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label for="weekSelect">Select Week:</label>
+                    <input type="date" id="weekSelect">
+                </div>
+                <div class="control-group">
+                    <label for="monthSelect">Select Month:</label>
+                    <input type="month" id="monthSelect">
+                </div>
+            </div>
+
+            <div class="charts">
+                <div class="chart-container">
+                    <h3>Overall Performance Trend</h3>
+                    <canvas id="lineChart"></canvas>
+                </div>
+                <div class="chart-row">
+                    <div class="chart-container">
+                        <h3>Monthly Performance</h3>
+                        <canvas id="barChart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <h3>Weekly Performance Distribution</h3>
+                        <canvas id="pieChart"></canvas>
+                    </div>
+                </div>
+            </div>
+  {% endblock %}
+  {% block extra_js %}
+    <script src="{{ url_for('static', filename='js/perfomance_metrics.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  {% endblock %}
+        

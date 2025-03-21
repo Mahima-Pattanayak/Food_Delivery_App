@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block title %}Order Management Dashboard{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/order_management.css') }}">
+{% endblock %}
+{% block content %}
+<div class="header">
+    <h2>Order Status</h2>
+</div>
+<div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Search here by Order ID">
+</div>
+
+<div class="content-wrapper">
+    <div class="orders-container">
+        <table class="order-table">
+            <thead>
+                <tr>
+                    <th>Customers Details</th>
+                    <th>Order ID</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="ordersList">
+                <!-- Orders will be populated by JavaScript -->
+            </tbody>
+        </table>
+
+        <div class="view-more">
+            <button id="viewMoreBtn">View More</button>
+        </div>
+    </div>
+
+    <div class="filters">
+        <div class="filter-title">Apply Filters</div>
+        <div class="filter-option">
+            <input type="checkbox" id="delivered" class="filter-checkbox">
+            <label for="delivered">Order Delivered</label>
+        </div>
+        <div class="filter-option">
+            <input type="checkbox" id="pending" class="filter-checkbox">
+            <label for="pending">Order Pending</label>
+        </div>
+        <div class="filter-option">
+            <input type="checkbox" id="preparing" class="filter-checkbox">
+            <label for="preparing">Order Preparing</label>
+        </div>
+        <div class="filter-option">
+            <input type="checkbox" id="progress" class="filter-checkbox">
+            <label for="progress">Order In Progress</label>
+        </div>
+        <div class="filter-option">
+            <input type="checkbox" id="cancelled" class="filter-checkbox">
+            <label for="cancelled">Order Cancelled</label>
+        </div>
+        <div class="filter-option">
+            <input type="checkbox" id="sort-price" class="filter-checkbox">
+            <label for="sort-price">Sort by price</label>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block extra_js %}
+    <script src="{{ url_for('static', filename='js/order_management.js') }}"></script>   
+{% endblock %}

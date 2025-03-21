@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Summary - HiFi Delivery Eats</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/order_summary.css') }}">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Logo">
+            <h2>Hifi Delivery Eats</h2>
+        </div>
+        <nav>
+            <a href="/menu/{{ user_id}}">Home</a>
+            <a href="{{ url_for('order_history', user_id=user_id) }}">Orders</a>
+            <a href="/promotions">Offers</a>
+            <a href="/signin">Log Out</a>
+        </nav>
+    </header>
+    
+    <main class="main-container">
+        <section class="left-container">
+            <div class="order-summary">
+                <h2>Order Summary</h2>
+                {% if order_items %}
+                    {% for item in order_items %}
+                    <section class="item-container">
+                        <img src="{{ item.image_url }}" alt="{{ item.name }}" class="item-image">
+                        <div class="item-details">
+                            <span class="item-name">{{ item.name }}</span>
+                            <div class="item-meta">
+                                <span>Quantity: {{ item.quantity }}</span>
+                                <span>Price per item: ${{ "%.2f"|format(item.price) }}</span>
+                            </div>
+                        </div>
+                        <span class="item-price">Total: ${{ "%.2f"|format(item.total) }}</span>
+                    </section>
+                    {% endfor %}
+                    <div class="subtotal">
+                        <strong>Sub Total:</strong>
+                        <span>${{ "%.2f"|format(subtotal) }}</span>
+                    </div>
+                {% else %}
+                    <p>No items found in this order.</p>
+                {% endif %}<br>
+                <p><b>Order Note: </b>{{order_note}}</p>
+            <br>
+                <p><b>Delivery Location: </b>{{order.delivery_location}}</p>
+            </div>
+            {% if order and order.order_status not in ['Cancelled', 'Pending'] %}
+<div class="order-tracking" id="orderTracking">
+    <h2>Order Tracking</h2>
+    {% set progress = {
+        'Preparing': 42,
+        'Out for Delivery': 75,
+        'Completed': 100,
+        'Order Confirmed': 10
+    } %}
+    
+    {% set current_progress = progress.get(order.order_status, 0) if order else 0 %}
+    
+    <div class="tracking-progress">
+        <div class="progress-line"></div>
+        <div class="progress-line-filled" style="width: {{ current_progress }}%;"></div>
+        <div class="tracking-step">
+            <div class="step-icon {% if current_progress >= 10 %}active{% endif %}">✓</div>
+            <p>Order Confirmed</p>
+        </div>
+        <div class="tracking-step">
+            <div class="step-icon {% if current_progress >= 42 %}active{% endif %}">🍳</div>
+            <p>Preparing Food</p>
+        </div>
+        <div class="tracking-step">
+            <div class="step-icon {% if current_progress >= 75 %}active{% endif %}">🚚</div>
+            <p>Out for Delivery</p>
+        </div>
+        <div class="tracking-step">
+            <div class="step-icon {% if current_progress >= 100 %}active{% endif %}">📦</div>
+            <p>Delivered</p>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+            <div id="agent-details-container" class="agent-details">
+                <h2>Delivery Agent Details</h2>
+                <div id="agent-info">
+                    <!-- Details will be dynamically loaded here -->
+                </div>
+            </div>            
+        </section>
+
+        <section class="total-payment">
+            <h2 style="text-align: center;">Total Payment</h2><br>
+            <ul>
+                <li>
+                    <strong>Sub Total:</strong>
+                    <span>${{ "%.2f"|format(subtotal) }}</span>
+                </li>
+                <li>
+                    <strong>Delivery Fee:</strong>
+                    <span>${{ "%.2f"|format(delivery_fee) }}</span>
+                </li>
+                <li>
+                    <strong>Tax Amount:</strong>
+                    <span>${{ "%.2f"|format(tax_amount) }}</span>
+                </li>
+                <li>
+                    <strong>Total Price:</strong>
+                    <span>${{ "%.2f"|format(total_price) }}</span>
+                </li>
+                <li>
+                    <strong>Order Status:</strong>
+                    <b><span>{{ order.order_status }}</span></b>
+                </li>
+            </ul>
+            <br>
+            {% if order.order_status == 'Cancelled' or order.order_status == 'Completed' %}
+            <!-- Feedback Button -->
+            <form action="/feedback-form/{{ order_id }}" method="POST">
+                <input type="hidden" name="order_id" value="{{ order_id }}">
+                <button type="submit" class="summary-button">Feedback</button>
+            </form>
+            {% else %}
+            <!-- Cancel Order Button -->
+            <form action="/cancel_order/{{ order_id }}" method="POST">
+                <input type="hidden" name="order_id" value="{{ order_id }}">
+                <button type="submit" class="summary-button">Cancel Order</button>
+            </form>
+            {% endif %}
+        </section>
+    </main>
+    <script src="{{ url_for('static', filename='js/order_summary.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,169 @@
+.header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.back-btn {
+    font-size: 18px;
+    padding: 5px 10px;
+    cursor: pointer;
+    background-color: #ff704d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.agent-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.details {
+    line-height: 1.8;
+    font-size: 16px;
+    flex-grow: 1;
+}
+
+.details strong {
+    font-weight: bold;
+}
+
+.details p {
+    margin: 5px 0;
+}
+
+.title-agent {
+    font-weight: bold;
+    line-height: 1.8;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.view-metrics {
+    margin-top: 15px;
+    padding: 10px 15px;
+    background-color: #e35734;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.total-orders {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #e35734;
+    padding: 20px;
+    border-radius: 50%;
+    color: white;
+    min-width: 100px;
+    min-height: 100px;
+    text-align: center;
+    margin-left: 20px;
+}
+
+.total-orders div {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.total-orders span {
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.daily-status {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.status-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.daily-status h2 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+.status {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.status > div {
+    flex: 1;
+    text-align: center;
+}
+
+.status p {
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.circle {
+    margin: 0 auto;
+    background-color: #b3b3cc;
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    border: 4px solid #ccc;
+}
+
+.date-picker {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.date-picker input[type="date"] {
+    padding: 5px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.view-btn {
+    padding: 5px 10px;
+    background-color: #ff704d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
