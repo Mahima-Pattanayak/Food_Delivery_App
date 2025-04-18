@@ -124,7 +124,17 @@ Key test areas include order tracking, authentication, cart & checkout validatio
 ---
 
 ## UI Preview
-![Sign in Page](images/Sign in Page.png)
+### Sign in Page
+![Sign in Page](images/Sign_in_page.png)
+
+### Admin panel
+![Admin panel](images/Admin_panel.png)
+
+### Order history
+![Order history](images/Order_History.png)
+
+### Order Management
+![Order Management](images/Order_management.png)
 
 ---
 
