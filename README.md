@@ -15,8 +15,8 @@
 - [Modules](#modules)
 - [Testing Strategy](#testing-strategy)
 - [Challenges & Solutions](#challenges--solutions)
+- [UI Preview](#ui-preview)
 - [How to Run](#how-to-run)
-
 
 ---
 
@@ -120,6 +120,11 @@ Key test areas include order tracking, authentication, cart & checkout validatio
 - **Real-Time Tracking:** Optimized API calls to reduce latency and ensure accuracy.
 - **Integration Difficulties:** Streamlined communication between system components and third-party APIs.
 - **Agile Development:** Iterative sprints enabled continuous feedback and improvement.
+
+---
+
+## UI Preview
+![Sign in Page](images/Sign in Page.png)
 
 ---
 
